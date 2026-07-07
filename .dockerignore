@@ -1,0 +1,9 @@
+node_modules
+dist
+shots
+.git
+.claude
+.mcp.json
+*.log
+npm-debug.log*
+.DS_Store

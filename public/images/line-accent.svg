@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="100%" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 14 13" width="100%">
+<g id="Menu">
+<line id="Line 2" stroke="var(--stroke-0, white)" stroke-width="2" x2="14" y1="1" y2="1"/>
+<line id="Line 3" stroke="var(--stroke-0, white)" stroke-width="2" x2="14" y1="6.5" y2="6.5"/>
+<line id="Line 4" stroke="var(--stroke-0, white)" stroke-width="2" x2="14" y1="12" y2="12"/>
+</g>
+</svg>

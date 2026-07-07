@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Tokens do design (Figma — Nano Holding, sessão 1) */
+@theme {
+  --color-nano-blue: #0344d1; /* superfícies / painel */
+  --color-nano-ink: #0445d5;  /* texto de destaque azul */
+  --color-nano-black: #000000;
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #000000;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
