@@ -35,99 +35,177 @@
       }
 
       #preloader .nano-loader {
-        --uib-size: 48px;
+        --uib-size: 60px;
         --uib-color: #0344d1; /* azul da marca (troca p/ #000 se quiser preto) */
-        --uib-speed: 2.5s;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: var(--uib-size);
-        width: var(--uib-size);
-      }
-      #preloader .slice {
+        --uib-speed: 1.5s;
+        --uib-dot-size: calc(var(--uib-size) * 0.1);
         position: relative;
-        height: calc(var(--uib-size) / 6);
-        width: 100%;
-      }
-      #preloader .slice::before,
-      #preloader .slice::after {
-        --uib-a: calc(var(--uib-speed) / -2);
-        --uib-b: calc(var(--uib-speed) / -6);
-        content: '';
-        position: absolute;
-        top: 0;
-        left: calc(50% - var(--uib-size) / 12);
-        height: 100%;
-        width: calc(100% / 6);
-        border-radius: 50%;
-        background-color: var(--uib-color);
-        flex-shrink: 0;
-        animation: nano-orbit var(--uib-speed) linear infinite;
-        transition: background-color 0.3s ease;
-      }
-      #preloader .slice:nth-child(1)::after {
-        animation-delay: var(--uib-a);
-      }
-      #preloader .slice:nth-child(2)::before {
-        animation-delay: var(--uib-b);
-      }
-      #preloader .slice:nth-child(2)::after {
-        animation-delay: calc(var(--uib-a) + var(--uib-b));
-      }
-      #preloader .slice:nth-child(3)::before {
-        animation-delay: calc(var(--uib-b) * 2);
-      }
-      #preloader .slice:nth-child(3)::after {
-        animation-delay: calc(var(--uib-a) + var(--uib-b) * 2);
-      }
-      #preloader .slice:nth-child(4)::before {
-        animation-delay: calc(var(--uib-b) * 3);
-      }
-      #preloader .slice:nth-child(4)::after {
-        animation-delay: calc(var(--uib-a) + var(--uib-b) * 3);
-      }
-      #preloader .slice:nth-child(5)::before {
-        animation-delay: calc(var(--uib-b) * 4);
-      }
-      #preloader .slice:nth-child(5)::after {
-        animation-delay: calc(var(--uib-a) + var(--uib-b) * 4);
-      }
-      #preloader .slice:nth-child(6)::before {
-        animation-delay: calc(var(--uib-b) * 5);
-      }
-      #preloader .slice:nth-child(6)::after {
-        animation-delay: calc(var(--uib-a) + var(--uib-b) * 5);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: calc(var(--uib-size) * 0.64);
+        width: calc(var(--uib-size) * 0.64);
       }
 
-      @keyframes nano-orbit {
-        0% { transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684); opacity: 0.65; }
-        5% { transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.684208); opacity: 0.58; }
-        10% { transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.631576); opacity: 0.51; }
-        15% { transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.578944); opacity: 0.44; }
-        20% { transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.526312); opacity: 0.37; }
-        25% { transform: translateX(0%) scale(0.47368); opacity: 0.3; }
-        30% { transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.526312); opacity: 0.37; }
-        35% { transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.578944); opacity: 0.44; }
-        40% { transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.631576); opacity: 0.51; }
-        45% { transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.684208); opacity: 0.58; }
-        50% { transform: translateX(calc(var(--uib-size) * -0.25)) scale(0.73684); opacity: 0.65; }
-        55% { transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.789472); opacity: 0.72; }
-        60% { transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.842104); opacity: 0.79; }
-        65% { transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.894736); opacity: 0.86; }
-        70% { transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.947368); opacity: 0.93; }
-        75% { transform: translateX(0%) scale(1); opacity: 1; }
-        80% { transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.947368); opacity: 0.93; }
-        85% { transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.894736); opacity: 0.86; }
-        90% { transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.842104); opacity: 0.79; }
-        95% { transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.789472); opacity: 0.72; }
-        100% { transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684); opacity: 0.65; }
+      @keyframes nano-jump {
+        0%,
+        100% {
+          transform: translateY(120%);
+        }
+        50% {
+          transform: translateY(-120%);
+        }
+      }
+
+      #preloader .dot {
+        --uib-d1: -0.48;
+        --uib-d2: -0.4;
+        --uib-d3: -0.32;
+        --uib-d4: -0.24;
+        --uib-d5: -0.16;
+        --uib-d6: -0.08;
+        --uib-d7: -0;
+        position: absolute;
+        bottom: calc(var(--uib-bottom) + var(--uib-dot-size) / 2);
+        right: calc(var(--uib-right) + var(--uib-dot-size) / 2);
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: var(--uib-dot-size);
+        width: var(--uib-dot-size);
+        animation: nano-jump var(--uib-speed) ease-in-out infinite;
+        opacity: var(--uib-scale);
+        will-change: transform;
+        backface-visibility: hidden;
+      }
+      #preloader .dot::before {
+        content: '';
+        height: 100%;
+        width: 100%;
+        background-color: var(--uib-color);
+        border-radius: 50%;
+        transform: scale(var(--uib-scale));
+        transition: background-color 0.3s ease;
+      }
+
+      #preloader .dot:nth-child(1) {
+        --uib-bottom: 24%;
+        --uib-right: -35%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d1));
+      }
+      #preloader .dot:nth-child(2) {
+        --uib-bottom: 16%;
+        --uib-right: -6%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d2));
+      }
+      #preloader .dot:nth-child(3) {
+        --uib-bottom: 8%;
+        --uib-right: 23%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d3));
+      }
+      #preloader .dot:nth-child(4) {
+        --uib-bottom: -1%;
+        --uib-right: 51%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d4));
+      }
+      #preloader .dot:nth-child(5) {
+        --uib-bottom: 38%;
+        --uib-right: -17.5%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d2));
+      }
+      #preloader .dot:nth-child(6) {
+        --uib-bottom: 30%;
+        --uib-right: 10%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d3));
+      }
+      #preloader .dot:nth-child(7) {
+        --uib-bottom: 22%;
+        --uib-right: 39%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d4));
+      }
+      #preloader .dot:nth-child(8) {
+        --uib-bottom: 14%;
+        --uib-right: 67%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d5));
+      }
+      #preloader .dot:nth-child(9) {
+        --uib-bottom: 53%;
+        --uib-right: -0.8%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d3));
+      }
+      #preloader .dot:nth-child(10) {
+        --uib-bottom: 44.5%;
+        --uib-right: 27%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d4));
+      }
+      #preloader .dot:nth-child(11) {
+        --uib-bottom: 36%;
+        --uib-right: 55.7%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d5));
+      }
+      #preloader .dot:nth-child(12) {
+        --uib-bottom: 28.7%;
+        --uib-right: 84.3%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d6));
+      }
+      #preloader .dot:nth-child(13) {
+        --uib-bottom: 66.8%;
+        --uib-right: 15%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d4));
+      }
+      #preloader .dot:nth-child(14) {
+        --uib-bottom: 58.8%;
+        --uib-right: 43%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d5));
+      }
+      #preloader .dot:nth-child(15) {
+        --uib-bottom: 50%;
+        --uib-right: 72%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d6));
+      }
+      #preloader .dot:nth-child(16) {
+        --uib-bottom: 42%;
+        --uib-right: 100%;
+        animation-delay: calc(var(--uib-speed) * var(--uib-d7));
+      }
+
+      #preloader .dot:nth-child(3) {
+        --uib-scale: 0.98;
+      }
+      #preloader .dot:nth-child(2),
+      #preloader .dot:nth-child(8) {
+        --uib-scale: 0.96;
+      }
+      #preloader .dot:nth-child(1),
+      #preloader .dot:nth-child(7) {
+        --uib-scale: 0.94;
+      }
+      #preloader .dot:nth-child(6),
+      #preloader .dot:nth-child(12) {
+        --uib-scale: 0.92;
+      }
+      #preloader .dot:nth-child(5),
+      #preloader .dot:nth-child(11) {
+        --uib-scale: 0.9;
+      }
+      #preloader .dot:nth-child(10),
+      #preloader .dot:nth-child(16) {
+        --uib-scale: 0.88;
+      }
+      #preloader .dot:nth-child(9),
+      #preloader .dot:nth-child(15) {
+        --uib-scale: 0.86;
+      }
+      #preloader .dot:nth-child(14) {
+        --uib-scale: 0.84;
+      }
+      #preloader .dot:nth-child(13) {
+        --uib-scale: 0.82;
       }
 
       @media (prefers-reduced-motion: reduce) {
-        #preloader .slice::before,
-        #preloader .slice::after {
-          animation-duration: 5s;
+        #preloader .dot {
+          animation-duration: 3s;
         }
       }
     </style>
@@ -136,19 +214,29 @@
     <!-- Preloader: fica fora do #root, o React não mexe nele -->
     <div id="preloader" role="status" aria-label="Carregando">
       <div class="nano-loader" aria-hidden="true">
-        <div class="slice"></div>
-        <div class="slice"></div>
-        <div class="slice"></div>
-        <div class="slice"></div>
-        <div class="slice"></div>
-        <div class="slice"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
       </div>
     </div>
 
     <script>
       (function () {
-        var MIN = 3000; // mínimo 3s na tela
-        var MAX = 6000; // teto de segurança (não trava se algo demorar)
+        var MIN = 2000; // mínimo 2s na tela
+        var MAX = 5000; // teto de segurança (não trava se algo demorar)
         var start = Date.now();
         var done = false;
 
@@ -167,7 +255,7 @@
         document.documentElement.classList.add('nano-loading');
         // teto: some no máximo em MAX
         setTimeout(hide, MAX);
-        // ideal: some quando a página terminou de carregar, respeitando o mínimo de 3s
+        // ideal: some quando a página terminou de carregar, respeitando o mínimo de 2s
         window.addEventListener('load', function () {
           var waited = Date.now() - start;
           setTimeout(hide, Math.max(0, MIN - waited));
