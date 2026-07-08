@@ -2,10 +2,10 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const content = {
-  label: 'Lorem ipsum dolor sit amet.',
+  label: 'Constituindo mercados.',
   headline: 'O mercado existe na medida que é observado.',
-  asideHeading: 'Lorem ipsum dolor sit amet.',
-  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  asideHeading: 'Antes da Forma a Origem.',
+  body: 'Esse est percipi: ser é ser percebido. Nada existe fora da percepção. — George Berkeley',
   brandName: 'Nano Holding',
   brandRole: 'Creative Company',
 }
