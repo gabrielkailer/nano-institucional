@@ -13,8 +13,168 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ===== Preloader (aparece instantâneo, cobre o carregamento) ===== -->
+    <style>
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        transition: opacity 0.6s ease;
+      }
+      #preloader.hide {
+        opacity: 0;
+        pointer-events: none;
+      }
+      html.nano-loading {
+        overflow: hidden;
+      }
+
+      #preloader .nano-loader {
+        --uib-size: 48px;
+        --uib-color: #0344d1; /* azul da marca (troca p/ #000 se quiser preto) */
+        --uib-speed: 2.5s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: var(--uib-size);
+        width: var(--uib-size);
+      }
+      #preloader .slice {
+        position: relative;
+        height: calc(var(--uib-size) / 6);
+        width: 100%;
+      }
+      #preloader .slice::before,
+      #preloader .slice::after {
+        --uib-a: calc(var(--uib-speed) / -2);
+        --uib-b: calc(var(--uib-speed) / -6);
+        content: '';
+        position: absolute;
+        top: 0;
+        left: calc(50% - var(--uib-size) / 12);
+        height: 100%;
+        width: calc(100% / 6);
+        border-radius: 50%;
+        background-color: var(--uib-color);
+        flex-shrink: 0;
+        animation: nano-orbit var(--uib-speed) linear infinite;
+        transition: background-color 0.3s ease;
+      }
+      #preloader .slice:nth-child(1)::after {
+        animation-delay: var(--uib-a);
+      }
+      #preloader .slice:nth-child(2)::before {
+        animation-delay: var(--uib-b);
+      }
+      #preloader .slice:nth-child(2)::after {
+        animation-delay: calc(var(--uib-a) + var(--uib-b));
+      }
+      #preloader .slice:nth-child(3)::before {
+        animation-delay: calc(var(--uib-b) * 2);
+      }
+      #preloader .slice:nth-child(3)::after {
+        animation-delay: calc(var(--uib-a) + var(--uib-b) * 2);
+      }
+      #preloader .slice:nth-child(4)::before {
+        animation-delay: calc(var(--uib-b) * 3);
+      }
+      #preloader .slice:nth-child(4)::after {
+        animation-delay: calc(var(--uib-a) + var(--uib-b) * 3);
+      }
+      #preloader .slice:nth-child(5)::before {
+        animation-delay: calc(var(--uib-b) * 4);
+      }
+      #preloader .slice:nth-child(5)::after {
+        animation-delay: calc(var(--uib-a) + var(--uib-b) * 4);
+      }
+      #preloader .slice:nth-child(6)::before {
+        animation-delay: calc(var(--uib-b) * 5);
+      }
+      #preloader .slice:nth-child(6)::after {
+        animation-delay: calc(var(--uib-a) + var(--uib-b) * 5);
+      }
+
+      @keyframes nano-orbit {
+        0% { transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684); opacity: 0.65; }
+        5% { transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.684208); opacity: 0.58; }
+        10% { transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.631576); opacity: 0.51; }
+        15% { transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.578944); opacity: 0.44; }
+        20% { transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.526312); opacity: 0.37; }
+        25% { transform: translateX(0%) scale(0.47368); opacity: 0.3; }
+        30% { transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.526312); opacity: 0.37; }
+        35% { transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.578944); opacity: 0.44; }
+        40% { transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.631576); opacity: 0.51; }
+        45% { transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.684208); opacity: 0.58; }
+        50% { transform: translateX(calc(var(--uib-size) * -0.25)) scale(0.73684); opacity: 0.65; }
+        55% { transform: translateX(calc(var(--uib-size) * -0.235)) scale(0.789472); opacity: 0.72; }
+        60% { transform: translateX(calc(var(--uib-size) * -0.182)) scale(0.842104); opacity: 0.79; }
+        65% { transform: translateX(calc(var(--uib-size) * -0.129)) scale(0.894736); opacity: 0.86; }
+        70% { transform: translateX(calc(var(--uib-size) * -0.076)) scale(0.947368); opacity: 0.93; }
+        75% { transform: translateX(0%) scale(1); opacity: 1; }
+        80% { transform: translateX(calc(var(--uib-size) * 0.076)) scale(0.947368); opacity: 0.93; }
+        85% { transform: translateX(calc(var(--uib-size) * 0.129)) scale(0.894736); opacity: 0.86; }
+        90% { transform: translateX(calc(var(--uib-size) * 0.182)) scale(0.842104); opacity: 0.79; }
+        95% { transform: translateX(calc(var(--uib-size) * 0.235)) scale(0.789472); opacity: 0.72; }
+        100% { transform: translateX(calc(var(--uib-size) * 0.25)) scale(0.73684); opacity: 0.65; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #preloader .slice::before,
+        #preloader .slice::after {
+          animation-duration: 5s;
+        }
+      }
+    </style>
   </head>
   <body>
+    <!-- Preloader: fica fora do #root, o React não mexe nele -->
+    <div id="preloader" role="status" aria-label="Carregando">
+      <div class="nano-loader" aria-hidden="true">
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+        <div class="slice"></div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var MIN = 3000; // mínimo 3s na tela
+        var MAX = 6000; // teto de segurança (não trava se algo demorar)
+        var start = Date.now();
+        var done = false;
+
+        function hide() {
+          if (done) return;
+          done = true;
+          var el = document.getElementById('preloader');
+          document.documentElement.classList.remove('nano-loading');
+          if (!el) return;
+          el.classList.add('hide');
+          setTimeout(function () {
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+          }, 700); // depois do fade
+        }
+
+        document.documentElement.classList.add('nano-loading');
+        // teto: some no máximo em MAX
+        setTimeout(hide, MAX);
+        // ideal: some quando a página terminou de carregar, respeitando o mínimo de 3s
+        window.addEventListener('load', function () {
+          var waited = Date.now() - start;
+          setTimeout(hide, Math.max(0, MIN - waited));
+        });
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
